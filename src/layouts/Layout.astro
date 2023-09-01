@@ -1,0 +1,59 @@
+---
+import {
+  AUTHOR,
+  DEFAULT_TITLE,
+  DEFAULT_DESCRIPTION,
+  SITE_NAME,
+  TWITTER_CREATOR,
+  TWITTER_SITE,
+} from "../consts";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+// Destructure properties from Astro.props and provide default values
+const {
+  // If 'title' is not defined in the Layout component, use the default title from consts.ts
+  title = DEFAULT_TITLE,
+
+  // If 'description' is not defined in the Layout component, use the default description from consts.ts
+  description = DEFAULT_DESCRIPTION,
+
+  // If 'image' is not defined in the Layout component, use 'og.png' as the default
+  // The 'image' is expected to be the image filename, and it should be placed in the 'public/' folder
+  // The base URL will be your URL, so you only need to provide the image filename.
+  image = "og.png",
+} = Astro.props;
+---
+
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={AUTHOR} />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#f199bf" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={Astro.url} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content={TWITTER_CREATOR} />
+    <meta name="twitter:site" content={TWITTER_SITE} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${Astro.site?.origin}/${image}`} />
+    <meta property="og:site_name" content={SITE_NAME} />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
