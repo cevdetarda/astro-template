@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://astro-template.pages.dev/sitemap-index.xml
+Sitemap: https://astro-template-egc.pages.dev/sitemap-index.xml
